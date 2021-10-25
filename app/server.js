@@ -1,77 +1,62 @@
 const express = require('express')
+const cors = require('cors')
+const compression = require('compression')
 const pinoHttp = require('pino-http')
-const { PORT } = require('./env')
+const bodyParser = require('body-parser')
+
+const env = require('./env')
 const logger = require('./logger')
+const createApolloServer = require('./apollo')
 
 async function createHttpServer() {
-  const app = express()
+  const server = createApolloServer()
   const requestLogger = pinoHttp({ logger })
+  const app = express()
+
+  app.use(compression())
+  app.use(cors())
 
   app.use((req, res, next) => {
     if (req.path !== '/health') requestLogger(req, res)
     next()
   })
 
+  app.use(bodyParser.json({ type: 'application/json', limit: env.MAX_QUERY_SIZE }))
+
+  server.applyMiddleware({ app })
+
   app.get('/health', async (req, res) => {
     res.status(200).send({ status: 'ok' })
   })
 
-  // Sorry - app.use checks arity
-  // eslint-disable-next-line no-unused-vars
   app.use((err, req, res, next) => {
-    if (err.status) {
-      res.status(err.status).send({ error: err.status === 401 ? 'Unauthorised' : err.message })
-    } else {
-      logger.error('Fallback Error %j', err.stack)
-      res.status(500).send('Fatal error!')
+    if (!res.headersSent) {
+      res.status(err.statusCode || 500).json({ error: { message: err.message } })
     }
+    next()
   })
 
   return { app }
 }
 
-/* istanbul ignore next */
 async function startServer() {
-  try {
-    const { app } = await createHttpServer()
+  const { app } = await createHttpServer()
 
-    const setupGracefulExit = ({ sigName, server, exitCode }) => {
-      process.on(sigName, async () => {
-        server.close(() => {
-          process.exit(exitCode)
-        })
-      })
-    }
-
-    const server = await new Promise((resolve, reject) => {
-      let resolved = false
-      const server = app.listen(PORT, (err) => {
-        if (err) {
-          if (!resolved) {
-            resolved = true
-            reject(err)
-          }
-        }
-        logger.info(`Listening on port ${PORT} `)
-        if (!resolved) {
-          resolved = true
-          resolve(server)
-        }
-      })
-      server.on('error', (err) => {
-        if (!resolved) {
-          resolved = true
-          reject(err)
-        }
+  const setupGracefulExit = ({ sigName, server, exitCode }) => {
+    process.on(sigName, async () => {
+      server.close(() => {
+        process.exit(exitCode)
       })
     })
-
-    setupGracefulExit({ sigName: 'SIGINT', server, exitCode: 0 })
-    setupGracefulExit({ sigName: 'SIGTERM', server, exitCode: 143 })
-  } catch (err) {
-    logger.fatal('Fatal error during initialisation: %j', err)
-    process.exit(1)
   }
+
+  const server = app.listen(env.PORT, (err) => {
+    if (err) throw new Error('Binding failed: ', err)
+    logger.info(`Listening on port ${env.PORT} `)
+  })
+
+  setupGracefulExit({ sigName: 'SIGINT', server, exitCode: 0 })
+  setupGracefulExit({ sigName: 'SIGTERM', server, exitCode: 143 })
 }
 
 module.exports = { startServer, createHttpServer }

@@ -7,13 +7,18 @@ FROM node:14.16.0-alpine
 # shadows the argument.
 ARG LOGLEVEL
 ENV NPM_CONFIG_LOGLEVEL ${LOGLEVEL}
+RUN apk update && \
+  apk add python make build-base && \
+  rm -rf /var/cache/apk/*
 
-WORKDIR /wasp-service-template
+# Copy jq script that can generate package.json files from package-lock.json
+# files.
+WORKDIR /wasp-api
 
 # Install base dependencies
 COPY . .
-RUN npm install --production
+RUN --mount=type=secret,id=github GITHUB_PACKAGE_TOKEN=$(cat /run/secrets/github) npm install --production
 
 
-EXPOSE 80
+EXPOSE 3001
 CMD ["node", "./app/index.js"]

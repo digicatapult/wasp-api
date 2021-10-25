@@ -1,0 +1,46 @@
+name: Documentation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docs:
+    name: Docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: 14.x
+      - name: Cache Node.js modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
+          key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-node-
+            ${{ runner.OS }}-
+      - name: Install Packages
+        run: npm ci
+        env:
+          GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup postgres
+        run: docker-compose up -d
+      - name: Sleep
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '10s'
+      - name: Generate API Documentation
+        run: npm run build:docs
+        env:
+          GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: Update API documentation to match ${{ github.sha }}
+          title: Update API documentation
+          body: Update API documentation to match ${{ github.sha }}
+          branch: bot/update-documentation
+          base: main

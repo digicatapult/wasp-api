@@ -1,0 +1,141 @@
+[
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b540",
+    "datasets": [
+      {
+        "id": "5081d047-c85f-4d1c-b612-49e8cd04b540",
+        "readings": [],
+        "type": "type_0",
+        "label": "label_0"
+      },
+      {
+        "id": "6081d047-c85f-4d1c-b612-49e8cd04b540",
+        "readings": [],
+        "type": "type_1",
+        "label": "label_0"
+      },
+      {
+        "id": "7081d047-c85f-4d1c-b612-49e8cd04b540",
+        "readings": [],
+        "type": "type_0",
+        "label": "label_1"
+      },
+      {
+        "id": "8081d047-c85f-4d1c-b612-49e8cd04b540",
+        "readings": [],
+        "type": "type_1",
+        "label": "label_1"
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b541",
+    "datasets": [
+      {
+        "id": "5081d047-c85f-4d1c-b612-49e8cd04b541",
+        "readings": [],
+        "type": "type_1",
+        "label": "label_1"
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b542",
+    "datasets": [
+      {
+        "id": "5081d047-c85f-4d1c-b612-49e8cd04b542",
+        "readings": [],
+        "type": "type_2",
+        "label": "label_2"
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b543",
+    "datasets": [
+      {
+        "id": "5081d047-c85f-4d1c-b612-49e8cd04b543",
+        "readings": [],
+        "type": "type_3",
+        "label": "label_3"
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b544",
+    "datasets": [
+      {
+        "id": "5081d047-c85f-4d1c-b612-49e8cd04b544",
+        "readings": [],
+        "type": "type_4",
+        "label": "label_4"
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b545",
+    "datasets": [
+      {
+        "id": "5081d047-c85f-4d1c-b612-49e8cd04b545",
+        "readings": [],
+        "type": "type_5",
+        "label": "label_5"
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b546",
+    "datasets": [
+      {
+        "id": "5081d047-c85f-4d1c-b612-49e8cd04b546",
+        "readings": [],
+        "type": "type_6",
+        "label": "label_6"
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b547",
+    "datasets": [
+      {
+        "id": "5081d047-c85f-4d1c-b612-49e8cd04b547",
+        "readings": [],
+        "type": "type_7",
+        "label": "label_7"
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b548",
+    "datasets": [
+      {
+        "id": "5081d047-c85f-4d1c-b612-49e8cd04b548",
+        "readings": [],
+        "type": "type_8",
+        "label": "label_8"
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b549",
+    "datasets": [
+      {
+        "id": "5081d047-c85f-4d1c-b612-49e8cd04b549",
+        "readings": [],
+        "type": "type_9",
+        "label": "label_9"
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b54F",
+    "datasets": [
+      {
+        "id": "5081d047-c85f-4d1c-b612-49e8cd04b54F",
+        "readings": [],
+        "type": "type_F",
+        "label": "label_F"
+      }
+    ]
+  }
+]

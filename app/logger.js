@@ -3,7 +3,7 @@ const env = require('./env')
 
 const logger = pino(
   {
-    name: env.SERVICE_TYPE,
+    name: 'API',
     level: env.LOG_LEVEL,
   },
   process.stdout

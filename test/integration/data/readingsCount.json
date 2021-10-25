@@ -1,0 +1,20 @@
+{
+  "thing": {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b540",
+    "type": "active_power_total",
+    "datasets": [
+      {
+        "label": "Schneider5111-id1",
+        "count": 110
+      },
+      {
+        "label": "Schneider5111-id2",
+        "count": 108
+      },
+      {
+        "label": "Schneider5111-id3",
+        "count": 109
+      }
+    ]
+  }
+}

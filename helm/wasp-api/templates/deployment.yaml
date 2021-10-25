@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "wasp-api.fullname" . }}
+  labels:
+    {{- include "wasp-api.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      name: {{ include "wasp-api.fullname" . }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+      labels:
+        name: {{ include "wasp-api.fullname" . }}
+    spec:
+      {{- include "wasp-api.imagePullSecrets" . | indent 6 }}
+      initContainers: []
+
+      containers:
+        - name: {{ include "wasp-api.fullname" . }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.config.waspApiPort }}
+            initialDelaySeconds: 15
+            timeoutSeconds: 3
+            periodSeconds: 5
+          env:
+            - name: LOG_LEVEL
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "wasp-api.fullname" . }}-config
+                  key: logLevel
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "wasp-api.fullname" . }}-config
+                  key: waspApiPort
+            - name: CACHE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "wasp-api.fullname" . }}-config
+                  key: redisHost
+            - name: CACHE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "wasp-api.fullname" . }}-config
+                  key: redisPort
+            - name: CACHE_ENABLE_TLS
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "wasp-api.fullname" . }}-config
+                  key: redisTlsEnabled
+            - name: CACHE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "wasp-api.fullname" . }}-secret
+                  key: redisPassword
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "wasp-api.fullname" . }}-secret
+                  key: jwtSecret
+            - name: THINGS_SERVICE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "wasp-api.fullname" . }}-config
+                  key: thingsHost
+            - name: THINGS_SERVICE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "wasp-api.fullname" . }}-config
+                  key: thingsPort
+            - name: READINGS_SERVICE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "wasp-api.fullname" . }}-config
+                  key: readingsHost
+            - name: READINGS_SERVICE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "wasp-api.fullname" . }}-config
+                  key: readingsPort
+            - name: USERS_SERVICE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "wasp-api.fullname" . }}-config
+                  key: usersHost
+            - name: USERS_SERVICE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "wasp-api.fullname" . }}-config
+                  key: usersPort

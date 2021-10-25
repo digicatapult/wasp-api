@@ -1,0 +1,167 @@
+[
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b540",
+    "type": "testSensor",
+    "ingests": [
+      {
+        "ingest": "ttn_v2",
+        "ingestId": "11111111111111110",
+        "configuration": {
+          "devEui": "11111111111111110",
+          "otaaAppEui": "22222222222222220",
+          "otaaAppKey": "111111111111111111111111111111110"
+        }
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b541",
+    "type": "testSensor",
+    "ingests": [
+      {
+        "ingest": "ttn_v2",
+        "ingestId": "11111111111111111",
+        "configuration": {
+          "devEui": "11111111111111111",
+          "otaaAppEui": "22222222222222220",
+          "otaaAppKey": "111111111111111111111111111111111"
+        }
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b542",
+    "type": "testSensor",
+    "ingests": [
+      {
+        "ingest": "ttn_v2",
+        "ingestId": "11111111111111112",
+        "configuration": {
+          "devEui": "11111111111111112",
+          "otaaAppEui": "22222222222222220",
+          "otaaAppKey": "111111111111111111111111111111112"
+        }
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b543",
+    "type": "testSensor",
+    "ingests": [
+      {
+        "ingest": "ttn_v2",
+        "ingestId": "11111111111111113",
+        "configuration": {
+          "devEui": "11111111111111113",
+          "otaaAppEui": "22222222222222220",
+          "otaaAppKey": "111111111111111111111111111111113"
+        }
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b544",
+    "type": "testSensor",
+    "ingests": [
+      {
+        "ingest": "ttn_v2",
+        "ingestId": "11111111111111114",
+        "configuration": {
+          "devEui": "11111111111111114",
+          "otaaAppEui": "22222222222222220",
+          "otaaAppKey": "111111111111111111111111111111114"
+        }
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b545",
+    "type": "testSensor",
+    "ingests": [
+      {
+        "ingest": "ttn_v2",
+        "ingestId": "11111111111111115",
+        "configuration": {
+          "devEui": "11111111111111115",
+          "otaaAppEui": "22222222222222220",
+          "otaaAppKey": "111111111111111111111111111111115"
+        }
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b546",
+    "type": "testSensor",
+    "ingests": [
+      {
+        "ingest": "ttn_v2",
+        "ingestId": "11111111111111116",
+        "configuration": {
+          "devEui": "11111111111111116",
+          "otaaAppEui": "22222222222222220",
+          "otaaAppKey": "111111111111111111111111111111116"
+        }
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b547",
+    "type": "testSensor",
+    "ingests": [
+      {
+        "ingest": "ttn_v2",
+        "ingestId": "11111111111111117",
+        "configuration": {
+          "devEui": "11111111111111117",
+          "otaaAppEui": "22222222222222220",
+          "otaaAppKey": "111111111111111111111111111111117"
+        }
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b548",
+    "type": "testSensor",
+    "ingests": [
+      {
+        "ingest": "ttn_v2",
+        "ingestId": "11111111111111118",
+        "configuration": {
+          "devEui": "11111111111111118",
+          "otaaAppEui": "22222222222222220",
+          "otaaAppKey": "111111111111111111111111111111118"
+        }
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b549",
+    "type": "testSensor",
+    "ingests": [
+      {
+        "ingest": "ttn_v2",
+        "ingestId": "11111111111111119",
+        "configuration": {
+          "devEui": "11111111111111119",
+          "otaaAppEui": "22222222222222220",
+          "otaaAppKey": "111111111111111111111111111111119"
+        }
+      }
+    ]
+  },
+  {
+    "uuid": "4081d047-c85f-4d1c-b612-49e8cd04b54F",
+    "type": "testSensor",
+    "ingests": [
+      {
+        "ingest": "ttn_v2",
+        "ingestId": "1111111111111111F",
+        "configuration": {
+          "devEui": "1111111111111111F",
+          "otaaAppEui": "22222222222222220",
+          "otaaAppKey": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaff"
+        }
+      }
+    ]
+  }
+]
