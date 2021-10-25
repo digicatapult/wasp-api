@@ -10,7 +10,7 @@ This document describes the GraphQL API schema for `wasp-api`
   * [Objects](#objects)
     * [IngestConfiguration](#ingestconfiguration)
     * [JWT](#jwt)
-    * [NotificationPreferences](#notificationpreferences)
+    * [NewUser](#newuser)
     * [Reading](#reading)
     * [Thing](#thing)
     * [ThingDataset](#thingdataset)
@@ -19,7 +19,6 @@ This document describes the GraphQL API schema for `wasp-api`
   * [Inputs](#inputs)
     * [DatasetsFilterInput](#datasetsfilterinput)
     * [IngestConfigurationInput](#ingestconfigurationinput)
-    * [NotificationPreferencesInput](#notificationpreferencesinput)
     * [ReadingsFilterInput](#readingsfilterinput)
     * [ThingInput](#thinginput)
     * [UpdateThingInput](#updatethinginput)
@@ -107,25 +106,6 @@ Get users in the system. (Admin only)
 </thead>
 <tbody>
 <tr>
-<td colspan="2" valign="top"><strong>login</strong></td>
-<td valign="top"><a href="#jwt">JWT</a>!</td>
-<td>
-
-Authenticates a user in the system
-
-</td>
-</tr>
-<tr>
-<td colspan="2" align="right" valign="top">username</td>
-<td valign="top"><a href="#string">String</a>!</td>
-<td></td>
-</tr>
-<tr>
-<td colspan="2" align="right" valign="top">password</td>
-<td valign="top"><a href="#string">String</a>!</td>
-<td></td>
-</tr>
-<tr>
 <td colspan="2" valign="top"><strong>createThing</strong></td>
 <td valign="top"><a href="#thing">Thing</a>!</td>
 <td>
@@ -172,7 +152,7 @@ Description of the update to the thing
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong>createUser</strong></td>
-<td valign="top"><a href="#user">User</a>!</td>
+<td valign="top"><a href="#newuser">NewUser</a>!</td>
 <td>
 
 Register a new user to the system (Admin only)
@@ -189,38 +169,11 @@ The username of the new user
 </td>
 </tr>
 <tr>
-<td colspan="2" align="right" valign="top">email</td>
-<td valign="top"><a href="#string">String</a>!</td>
-<td>
-
-The email address of the new user
-
-</td>
-</tr>
-<tr>
 <td colspan="2" align="right" valign="top">isAdmin</td>
 <td valign="top"><a href="#boolean">Boolean</a>!</td>
 <td>
 
 Whether the new user should also be an Admin user
-
-</td>
-</tr>
-<tr>
-<td colspan="2" valign="top"><strong>updateUserNotificationPreferences</strong></td>
-<td valign="top"><a href="#boolean">Boolean</a>!</td>
-<td>
-
-Updates the notification preferences for the currently authenticated user
-
-</td>
-</tr>
-<tr>
-<td colspan="2" align="right" valign="top">notificationPreferences</td>
-<td valign="top"><a href="#notificationpreferencesinput">NotificationPreferencesInput</a>!</td>
-<td>
-
-The current users new notification preferences
 
 </td>
 </tr>
@@ -244,10 +197,10 @@ The current user's new password
 </tr>
 <tr>
 <td colspan="2" valign="top"><strong>resetUserPassword</strong></td>
-<td valign="top"><a href="#boolean">Boolean</a>!</td>
+<td valign="top"><a href="#string">String</a>!</td>
 <td>
 
-Reset the specified users password. Sends the user an email requiring them to update their password (Admin only)
+Reset the specified users password. (Admin only)
 
 </td>
 </tr>
@@ -361,9 +314,9 @@ Javascript Web Token
 </tbody>
 </table>
 
-### NotificationPreferences
+### NewUser
 
-User notification preferences
+A new user
 
 <table>
 <thead>
@@ -376,20 +329,47 @@ User notification preferences
 </thead>
 <tbody>
 <tr>
-<td colspan="2" valign="top"><strong>receiveWarnings</strong></td>
-<td valign="top"><a href="#boolean">Boolean</a>!</td>
+<td colspan="2" valign="top"><strong>username</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
 <td>
 
-Does the user receive emails for warning events
+The unique username of the user
 
 </td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong>receiveAlerts</strong></td>
-<td valign="top"><a href="#boolean">Boolean</a>!</td>
+<td colspan="2" valign="top"><strong>type</strong></td>
+<td valign="top"><a href="#usertype">UserType</a>!</td>
 <td>
 
-Does the user receive emails for alert events
+Type of the user
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdAt</strong></td>
+<td valign="top"><a href="#date">Date</a>!</td>
+<td>
+
+Timestamp at which the user was created
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>password</strong></td>
+<td valign="top"><a href="#string">String</a>!</td>
+<td>
+
+The password for the new user
+
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="top"><strong>createdBy</strong></td>
+<td valign="top"><a href="#user">User</a>!</td>
+<td>
+
+The user that created this user
 
 </td>
 </tr>
@@ -645,15 +625,6 @@ The unique username of the user
 </td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong>email</strong></td>
-<td valign="top"><a href="#string">String</a></td>
-<td>
-
-The email address of the user. Should be not null (see WASP-64)
-
-</td>
-</tr>
-<tr>
 <td colspan="2" valign="top"><strong>type</strong></td>
 <td valign="top"><a href="#usertype">UserType</a>!</td>
 <td>
@@ -672,29 +643,11 @@ Timestamp at which the user was created
 </td>
 </tr>
 <tr>
-<td colspan="2" valign="top"><strong>passwordExpiry</strong></td>
-<td valign="top"><a href="#date">Date</a></td>
-<td>
-
-Timestamp when the user's password will expire
-
-</td>
-</tr>
-<tr>
 <td colspan="2" valign="top"><strong>createdBy</strong></td>
 <td valign="top"><a href="#user">User</a>!</td>
 <td>
 
 The user that created this user
-
-</td>
-</tr>
-<tr>
-<td colspan="2" valign="top"><strong>notificationPreferences</strong></td>
-<td valign="top"><a href="#notificationpreferences">NotificationPreferences</a>!</td>
-<td>
-
-Notification preferences of this user
 
 </td>
 </tr>
@@ -768,40 +721,6 @@ The name of the ingest the thing can send data via
 <td>
 
 The network configuration of the new thing for the ingest
-
-</td>
-</tr>
-</tbody>
-</table>
-
-### NotificationPreferencesInput
-
-Specifier for user notification preferences
-
-<table>
-<thead>
-<tr>
-<th colspan="2" align="left">Field</th>
-<th align="left">Type</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td colspan="2" valign="top"><strong>receiveWarnings</strong></td>
-<td valign="top"><a href="#boolean">Boolean</a>!</td>
-<td>
-
-Whether the user should receive email alerts for warning events
-
-</td>
-</tr>
-<tr>
-<td colspan="2" valign="top"><strong>receiveAlerts</strong></td>
-<td valign="top"><a href="#boolean">Boolean</a>!</td>
-<td>
-
-Whether the user should receive email alerts for alert events
 
 </td>
 </tr>
