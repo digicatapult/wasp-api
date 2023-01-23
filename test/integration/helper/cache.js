@@ -1,7 +1,9 @@
-const redis = require('redis')
-const { CACHE_HOST, CACHE_PORT, CACHE_PASSWORD } = require('../../../app/env')
+import { createClient } from 'redis'
+import env from '../../../app/env.js'
 
-const redisClient = redis.createClient({
+const { CACHE_HOST, CACHE_PORT, CACHE_PASSWORD } = env
+
+const redisClient = createClient({
   host: CACHE_HOST,
   port: CACHE_PORT,
   ...(CACHE_PASSWORD !== null ? { password: CACHE_PASSWORD } : {}),
@@ -21,6 +23,4 @@ const setupCacheClearer = () => {
   })
 }
 
-module.exports = {
-  setup: setupCacheClearer,
-}
+export const setup = setupCacheClearer

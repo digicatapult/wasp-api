@@ -1,4 +1,4 @@
-const { expect } = require('chai')
+import { expect } from 'chai'
 
 const assertReadingEqual = (readingA, readingB) => {
   expect(readingA.timestamp).to.equal(readingB.timestamp)
@@ -13,7 +13,4 @@ const assertReadingsEqual = (readingA, readingB) => {
   }
 }
 
-module.exports = {
-  assertReadingsEqual,
-  assertReadingEqual,
-}
+export { assertReadingsEqual, assertReadingEqual }

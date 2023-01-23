@@ -1,16 +1,10 @@
-const { describe, it } = require('mocha')
-const { setup: setupClient } = require('./helper/client')
-const { setup: setupUsers, makeDefaultUsersMock } = require('./helper/usersMock')
+import { describe, it } from 'mocha'
+import { setup as setupClient } from './helper/client.js'
+import { setup as setupUsers, makeDefaultUsersMock } from './helper/usersMock.js'
+import data from './helper/data.js'
 
-const {
-  createUserQuery,
-  userLoginCreds,
-  getUser,
-  createUser,
-  assertUser,
-  assertCreatedUser,
-  assertCreatedUserError,
-} = require('./helper/data')
+const { createUserQuery, userLoginCreds, getUser, createUser, assertUser, assertCreatedUser, assertCreatedUserError } =
+  data
 
 describe('create user tests', () => {
   describe('create user', () => {
@@ -33,6 +27,7 @@ describe('create user tests', () => {
 
       await createUserQuery(context, userLoginCreds[0], expectedResult.username, false)
       let actualResult = context.actualResult
+      console.log(actualResult)
       assertCreatedUser(actualResult, expectedResult, 'createUser')
 
       await getUser(context, {

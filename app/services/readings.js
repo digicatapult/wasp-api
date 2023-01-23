@@ -1,7 +1,9 @@
-const fetch = require('node-fetch')
+import fetch from 'node-fetch'
 
-const { READINGS_SERVICE_HOST, READINGS_SERVICE_PORT } = require('../env')
-const logger = require('../logger')
+import env from '../env.js'
+import logger from '../logger.js'
+
+const { READINGS_SERVICE_HOST, READINGS_SERVICE_PORT } = env
 
 class ReadingsServiceError extends Error {
   constructor({ code, message }) {
@@ -149,7 +151,7 @@ const getDatasetReadingsCount = async ({ thingId, datasetId }, query) => {
   return readingsCount
 }
 
-module.exports = {
+export default {
   Errors: {
     ReadingsServiceError,
   },

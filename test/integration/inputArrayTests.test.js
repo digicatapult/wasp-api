@@ -1,9 +1,12 @@
-const { describe, it, before } = require('mocha')
-const { expect } = require('chai')
+import { describe, it, before } from 'mocha'
+import { expect } from 'chai'
 
-const { setup: setupClient } = require('./helper/client')
-const { mockClock, restoreClock } = require('./helper/clock')
-const { userLoginCreds } = require('./helper/data')
+import { setup as setupClient } from './helper/client.js'
+import clock from './helper/clock.js'
+import data from './helper/data.js'
+
+const { mockClock, restoreClock } = clock
+const { userLoginCreds } = data
 
 const [adminLogin] = userLoginCreds
 

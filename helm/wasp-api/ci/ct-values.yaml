@@ -1,4 +1,0 @@
-image:
-  repository: 'wasp-api'
-  tag: 'latest'
-  PullPolicy: Never

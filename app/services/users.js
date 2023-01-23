@@ -1,8 +1,9 @@
-const fetch = require('node-fetch')
+import fetch from 'node-fetch'
 
-const { USERS_SERVICE_HOST, USERS_SERVICE_PORT } = require('../env')
-const logger = require('../logger')
+import env from '../env.js'
+import logger from '../logger.js'
 
+const { USERS_SERVICE_HOST, USERS_SERVICE_PORT } = env
 class UsersServiceError extends Error {
   constructor({ code, message }) {
     super(message)
@@ -178,7 +179,7 @@ const updateUser = async (asUserId, { userId, role }) => {
   }
 }
 
-module.exports = {
+export default {
   Errors: {
     UsersServiceError,
   },

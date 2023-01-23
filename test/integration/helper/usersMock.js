@@ -1,10 +1,11 @@
-const { before, after } = require('mocha')
+import { before, after } from 'mocha'
+import express, { json } from 'express'
 
-const express = require('express')
-const bodyParser = require('body-parser')
-const { userLoginCreds } = require('./data')
+import data from './data.js'
+import env from '../../../app/env.js'
 
-const { USERS_SERVICE_PORT } = require('../../../app/env')
+const { userLoginCreds } = data
+const { USERS_SERVICE_PORT } = env
 
 const makeDefaultUsersMock = () => ({
   users: userLoginCreds.map(({ id, username, type, createdAt }) => ({
@@ -21,7 +22,7 @@ const setupUsersMock = (context) => {
 
   before(async function () {
     const app = express()
-    app.use(bodyParser.json({ type: 'application/json' }))
+    app.use(json())
 
     app.get('/v1/user/current', async (req, res) => {
       const userId = req.headers['user-id']
@@ -148,4 +149,4 @@ const setupUsersMock = (context) => {
   })
 }
 
-module.exports = { setup: setupUsersMock, makeDefaultUsersMock }
+export { setupUsersMock as setup, makeDefaultUsersMock }

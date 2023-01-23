@@ -1,12 +1,11 @@
-const dataLoader = require('dataloader')
+import dataLoader from 'dataloader'
 
-const logger = require('../logger')
+import logger from '../logger.js'
+import { things } from '../services/index.js'
 
-const {
-  things: { getThing },
-} = require('../services')
+const { getThing } = things
 
-const buildThingLoader = () => {
+export const buildThingLoader = () => {
   return new dataLoader(async (thingIds) => {
     return await Promise.all(
       thingIds.map(async (id) => {
@@ -19,8 +18,4 @@ const buildThingLoader = () => {
       })
     )
   })
-}
-
-module.exports = {
-  buildThingLoader,
 }

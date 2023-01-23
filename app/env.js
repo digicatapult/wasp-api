@@ -1,4 +1,5 @@
-const envalid = require('envalid')
+import envalid from 'envalid'
+import dotenv from 'dotenv'
 
 const nullSymbol = Symbol('null match')
 const allowNullDefaults = (validator, opts) => {
@@ -8,12 +9,10 @@ const allowNullDefaults = (validator, opts) => {
   }, `optional_${validator.type}`)(opts)
 }
 
-const options = {
-  strict: true,
-}
-
 if (process.env.NODE_ENV === 'test') {
-  options.dotEnvPath = 'test/test.env'
+  dotenv.config({ path: 'test/test.env' })
+} else {
+  dotenv.config()
 }
 
 const vars = envalid.cleanEnv(
@@ -36,10 +35,12 @@ const vars = envalid.cleanEnv(
     USERS_SERVICE_HOST: envalid.host({ default: 'wasp-user-service' }),
     USERS_SERVICE_PORT: envalid.port({ default: 80 }),
   },
-  options
+  {
+    strict: true,
+  }
 )
 
-module.exports = Object.entries({
+export default Object.entries({
   ...vars,
 }).reduce((acc, [key, val]) => {
   return {

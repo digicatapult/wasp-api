@@ -1,6 +1,6 @@
-const sinon = require('sinon')
+import sinon from 'sinon'
 
-module.exports = {
+export default {
   mockClock: (context) => {
     before(function () {
       context.clock = sinon.useFakeTimers()

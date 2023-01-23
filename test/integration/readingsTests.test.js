@@ -1,20 +1,23 @@
-const { describe, it, before } = require('mocha')
-const { expect } = require('chai')
+import { describe, it, before } from 'mocha'
+import { expect } from 'chai'
 
-const { setup: setupClient } = require('./helper/client')
-const { assertReadingsEqual } = require('./helper/readings')
-const { mockClock, restoreClock } = require('./helper/clock')
-const { setup: setupThings } = require('./helper/thingsMock')
-const { setup: setupReadings } = require('./helper/readingsMock')
-const { setup: setupUsers } = require('./helper/usersMock')
-const { setup: setupCacheClearer } = require('./helper/cache')
-const { userLoginCreds } = require('./helper/data')
+import { setup as setupClient } from './helper/client.js'
+import { assertReadingsEqual } from './helper/readings.js'
+import clock from './helper/clock.js'
+import { setup as setupThings } from './helper/thingsMock.js'
+import { setup as setupReadings } from './helper/readingsMock.js'
+import { setup as setupUsers } from './helper/usersMock.js'
+import { setup as setupCacheClearer } from './helper/cache.js'
+import data from './helper/data.js'
 
-const allThingsExpectation = require('./data/thingsTestAllThings')
-const allReadingsExpectation = require('./data/readingTestSingleDataset')
-const allThingReadingsCount = require('./data/readingsThingCount')
-const allReadingsCount = require('./data/readingsCountData')
-const allReadingsCountExpectation = require('./data/readingsCount')
+import allThingsExpectation from './data/thingsTestAllThings.json' assert { type: 'json' }
+import allReadingsExpectation from './data/readingTestSingleDataset.json' assert { type: 'json' }
+import allThingReadingsCount from './data/readingsThingCount.json' assert { type: 'json' }
+import allReadingsCount from './data/readingsCountData.json' assert { type: 'json' }
+import allReadingsCountExpectation from './data/readingsCount.json' assert { type: 'json' }
+
+const { mockClock, restoreClock } = clock
+const { userLoginCreds } = data
 
 const thingsMock = {
   things: allThingsExpectation.map(({ uuid: id, type, ingests, metadata }) => ({

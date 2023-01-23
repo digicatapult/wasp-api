@@ -1,4 +1,4 @@
-const { expect } = require('chai')
+import { expect } from 'chai'
 
 const uuidSortFn = (a, b) => {
   if (a.uuid < b.uuid) {
@@ -30,7 +30,4 @@ const assertThingsEqual = (thingA, thingB) => {
   }
 }
 
-module.exports = {
-  assertThingsEqual,
-  assertThingEqual,
-}
+export { assertThingsEqual, assertThingEqual }

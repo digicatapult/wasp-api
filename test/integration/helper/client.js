@@ -1,6 +1,6 @@
-const request = require('supertest')
-const { createHttpServer } = require('../../../app/server')
-const { mkQueries } = require('./queries')
+import request from 'supertest'
+import { createHttpServer } from '../../../app/server.js'
+import { mkQueries } from './queries.js'
 
 function createApolloClient(waspAPI) {
   const client = async ({ userId, data }) => {
@@ -25,7 +25,7 @@ function createApolloClient(waspAPI) {
 }
 
 let apiObj = null
-module.exports.setup = function (context) {
+export function setup(context) {
   before(async function () {
     if (apiObj === null) {
       apiObj = {}

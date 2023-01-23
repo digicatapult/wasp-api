@@ -1,9 +1,10 @@
-const { describe, it } = require('mocha')
-const { expect } = require('chai')
-const { setup: setupClient } = require('./helper/client')
-const { setup: setupUsers } = require('./helper/usersMock')
+import { describe, it } from 'mocha'
+import { expect } from 'chai'
+import { setup as setupClient } from './helper/client.js'
+import { setup as setupUsers } from './helper/usersMock.js'
+import data from './helper/data.js'
 
-const { userLoginCreds, createUser, getUser, getUsers, assertUser, assertUsers } = require('./helper/data')
+const { userLoginCreds, createUser, getUser, getUsers, assertUser, assertUsers } = data
 
 describe('get user tests', () => {
   describe('get user', () => {

@@ -1,0 +1,7 @@
+{
+  "recursive": true,
+  "slow": 5000,
+  "timeout": 10000,
+  "extension": [".test.js"],
+  "exit": true
+}

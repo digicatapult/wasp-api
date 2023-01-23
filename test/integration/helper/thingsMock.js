@@ -1,14 +1,15 @@
-const { before, after } = require('mocha')
+import { before, after } from 'mocha'
 
-const express = require('express')
-const bodyParser = require('body-parser')
+import express, { json } from 'express'
 
-const { THINGS_SERVICE_PORT } = require('../../../app/env')
+import env from '../../../app/env.js'
+
+const { THINGS_SERVICE_PORT } = env
 
 const setupThingsMock = (context) => {
   before(async function () {
     const app = express()
-    app.use(bodyParser.json({ type: 'application/json' }))
+    app.use(json())
 
     app.get('/v1/thing', async (req, res) => {
       res.status(200).send(
@@ -91,4 +92,4 @@ const setupThingsMock = (context) => {
   })
 }
 
-module.exports = { setup: setupThingsMock }
+export const setup = setupThingsMock

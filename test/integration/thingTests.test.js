@@ -1,14 +1,17 @@
-const { describe, it, before } = require('mocha')
-const { expect } = require('chai')
+import { describe, it, before } from 'mocha'
+import { expect } from 'chai'
 
-const { setup: setupClient } = require('./helper/client')
-const { assertThingEqual, assertThingsEqual } = require('./helper/things')
-const { mockClock, restoreClock } = require('./helper/clock')
-const { setup: setupThings } = require('./helper/thingsMock')
-const { setup: setupUsers } = require('./helper/usersMock')
-const { userLoginCreds } = require('./helper/data')
+import { setup as setupClient } from './helper/client.js'
+import { assertThingEqual, assertThingsEqual } from './helper/things.js'
+import clock from './helper/clock.js'
+import { setup as setupThings } from './helper/thingsMock.js'
+import { setup as setupUsers } from './helper/usersMock.js'
+import data from './helper/data.js'
 
-const allThingsExpectation = require('./data/thingsTestAllThings')
+import allThingsExpectation from './data/thingsTestAllThings.json' assert { type: 'json' }
+
+const { mockClock, restoreClock } = clock
+const { userLoginCreds } = data
 
 const thingsMock = {
   things: allThingsExpectation.map(({ uuid: id, type, ingests, metadata }) => ({

@@ -1,9 +1,5 @@
-const readings = require('./readings')
-const things = require('./things')
-const users = require('./users')
+import readings from './readings.js'
+import things from './things.js'
+import users from './users.js'
 
-module.exports = {
-  readings,
-  things,
-  users,
-}
+export { readings, things, users }

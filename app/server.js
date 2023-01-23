@@ -1,12 +1,12 @@
-const express = require('express')
-const cors = require('cors')
-const compression = require('compression')
-const pinoHttp = require('pino-http')
-const bodyParser = require('body-parser')
+import express from 'express'
+import cors from 'cors'
+import compression from 'compression'
+import pinoHttp from 'pino-http'
+import { expressMiddleware } from '@apollo/server/express4'
 
-const env = require('./env')
-const logger = require('./logger')
-const createApolloServer = require('./apollo')
+import env from './env.js'
+import logger from './logger.js'
+import createApolloServer from './apollo.js'
 
 async function createHttpServer() {
   const server = createApolloServer()
@@ -21,9 +21,14 @@ async function createHttpServer() {
     next()
   })
 
-  app.use(bodyParser.json({ type: 'application/json', limit: env.MAX_QUERY_SIZE }))
-
-  server.applyMiddleware({ app })
+  await server.start()
+  app.use(
+    cors(),
+    express.json({ limit: env.MAX_QUERY_SIZE }),
+    expressMiddleware(server, {
+      context: async ({ req }) => ({ token: req.headers.token }),
+    })
+  )
 
   app.get('/health', async (req, res) => {
     res.status(200).send({ status: 'ok' })
@@ -59,4 +64,4 @@ async function startServer() {
   setupGracefulExit({ sigName: 'SIGTERM', server, exitCode: 143 })
 }
 
-module.exports = { startServer, createHttpServer }
+export { startServer, createHttpServer }
