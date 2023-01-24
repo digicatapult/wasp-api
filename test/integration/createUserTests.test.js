@@ -27,7 +27,6 @@ describe('create user tests', () => {
 
       await createUserQuery(context, userLoginCreds[0], expectedResult.username, false)
       let actualResult = context.actualResult
-      console.log(actualResult)
       assertCreatedUser(actualResult, expectedResult, 'createUser')
 
       await getUser(context, {

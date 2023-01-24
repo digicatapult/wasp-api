@@ -9,7 +9,7 @@ const redisClient = createClient({
   ...(CACHE_PASSWORD !== null ? { password: CACHE_PASSWORD } : {}),
 })
 
-const setupCacheClearer = () => {
+export const setupCacheClearer = () => {
   before(async function () {
     return new Promise((resolve) => {
       redisClient.flushall(() => resolve())
@@ -22,5 +22,3 @@ const setupCacheClearer = () => {
     })
   })
 }
-
-export const setup = setupCacheClearer

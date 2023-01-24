@@ -7,7 +7,7 @@ import clock from './helper/clock.js'
 import { setup as setupThings } from './helper/thingsMock.js'
 import { setup as setupReadings } from './helper/readingsMock.js'
 import { setup as setupUsers } from './helper/usersMock.js'
-import { setup as setupCacheClearer } from './helper/cache.js'
+import { setupCacheClearer } from './helper/cache.js'
 import data from './helper/data.js'
 
 import allThingsExpectation from './data/thingsTestAllThings.json' assert { type: 'json' }
@@ -54,7 +54,7 @@ describe('readings tests', function () {
     setupThings(context)
     setupReadings(context)
     setupUsers(context)
-    setupCacheClearer()
+    //setupCacheClearer()
 
     before(async function () {
       const {
@@ -81,7 +81,7 @@ describe('readings tests', function () {
     setupThings(context)
     setupReadings(context)
     setupUsers(context)
-    setupCacheClearer()
+    //setupCacheClearer()
 
     before(async function () {
       const {
@@ -108,7 +108,7 @@ describe('readings tests', function () {
     setupThings(context)
     setupReadings(context)
     setupUsers(context)
-    setupCacheClearer()
+    //setupCacheClearer()
 
     before(async function () {
       const {
@@ -138,7 +138,7 @@ describe('readings tests', function () {
     setupThings(context)
     setupReadings(context)
     setupUsers(context)
-    setupCacheClearer()
+    //setupCacheClearer()
 
     before(async function () {
       const {
@@ -179,7 +179,7 @@ describe('readings tests', function () {
     setupThings(context)
     setupReadings(context)
     setupUsers(context)
-    setupCacheClearer()
+    //setupCacheClearer()
 
     before(async function () {
       const {
@@ -212,7 +212,7 @@ describe('readings tests', function () {
     setupThings(context)
     setupReadings(context)
     setupUsers(context)
-    setupCacheClearer()
+    //setupCacheClearer()
 
     before(async function () {
       const {
@@ -251,7 +251,7 @@ describe('readings tests', function () {
     setupThings(context)
     setupReadings(context)
     setupUsers(context)
-    setupCacheClearer()
+    //setupCacheClearer()
 
     before(async function () {
       const {
@@ -286,7 +286,7 @@ describe('readings tests', function () {
     setupThings(context)
     setupReadings(context)
     setupUsers(context)
-    setupCacheClearer()
+    //setupCacheClearer()
 
     before(async function () {
       const {
@@ -325,7 +325,7 @@ describe('readings tests', function () {
     setupThings(context)
     setupReadings(context)
     setupUsers(context)
-    setupCacheClearer()
+    //setupCacheClearer()
 
     before(async function () {
       const {
@@ -364,7 +364,7 @@ describe('readings tests', function () {
     setupThings(context)
     setupReadings(context)
     setupUsers(context)
-    setupCacheClearer()
+    //setupCacheClearer()
 
     before(async function () {
       const {
@@ -404,7 +404,7 @@ describe('readings tests', function () {
     setupThings(context)
     setupReadings(context)
     setupUsers(context)
-    setupCacheClearer()
+    //setupCacheClearer()
 
     before(async function () {
       const {
@@ -444,7 +444,7 @@ describe('readings tests', function () {
     setupThings(context)
     setupReadings(context)
     setupUsers(context)
-    setupCacheClearer()
+    //setupCacheClearer()
 
     before(async function () {
       const {
@@ -481,7 +481,7 @@ describe('readings tests', function () {
     setupThings(context)
     setupReadings(context)
     setupUsers(context)
-    setupCacheClearer()
+    //setupCacheClearer()
 
     before(async function () {
       const {
@@ -519,7 +519,7 @@ describe('readings tests', function () {
     setupThings(context)
     setupReadings(context)
     setupUsers(context)
-    setupCacheClearer()
+    //setupCacheClearer()
 
     before(async function () {
       const {
