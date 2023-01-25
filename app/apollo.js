@@ -1,5 +1,6 @@
 import { ApolloServer } from '@apollo/server'
-//const { RedisCache } = require('apollo-server-cache-redis')
+import Redis from 'ioredis'
+
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import validationPlugin from '@digicatapult/apollo-type-validation-plugin'
 
@@ -21,17 +22,9 @@ function createApolloServer() {
 
   const server = new ApolloServer({
     schema,
-    validationRules: [],
     playground: env.ENABLE_GRAPHQL_PLAYGROUND,
     tracing: env.ENABLE_GRAPHQL_PLAYGROUND,
     plugins: [typeValidationPlugin({ schema, directives: [arrayLengthDirective(), boundedIntegerDirective()] })],
-    // cache: new RedisCache({
-    //   host: env.CACHE_HOST,
-    //   port: env.CACHE_PORT,
-    //   keyPrefix: `${env.CACHE_PREFIX}_APOLLO_`,
-    //   ...(env.CACHE_PASSWORD !== null ? { password: env.CACHE_PASSWORD } : {}),
-    //   ...(env.CACHE_ENABLE_TLS ? { tls: {} } : {}),
-    // }),
   })
 
   return server

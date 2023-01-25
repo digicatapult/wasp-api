@@ -4,6 +4,8 @@ import compression from 'compression'
 import pinoHttp from 'pino-http'
 import { expressMiddleware } from '@apollo/server/express4'
 import { ResolverCacheDataSource } from '@digicatapult/resolver-cache-datasource'
+import { KeyvAdapter } from '@apollo/utils.keyvadapter'
+import Keyv from 'keyv'
 
 import buildDataLoaders from './loaders/index.js'
 import { users as usersService } from './services/index.js'
@@ -43,15 +45,13 @@ async function createHttpServer() {
         }
 
         const loaders = buildDataLoaders()
-
-        return { logger, user, loaders }
-      },
-      dataSources: () => {
-        return {
+        const dataSources = {
           autoResolver: new ResolverCacheDataSource({
             defaultTTL: env.CACHE_MAX_TTL,
+            cache: new KeyvAdapter(new Keyv(`redis://${env.CACHE_HOST}:${env.CACHE_PORT}`)),
           }),
         }
+        return { logger, user, loaders, dataSources }
       },
     })
   )
