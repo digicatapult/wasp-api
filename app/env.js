@@ -1,8 +1,6 @@
 import envalid from 'envalid'
 import dotenv from 'dotenv'
 
-const nullSymbol = Symbol('null match')
-
 if (process.env.NODE_ENV === 'test') {
   dotenv.config({ path: 'test/test.env' })
 } else {
