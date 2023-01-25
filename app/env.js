@@ -24,7 +24,6 @@ const vars = envalid.cleanEnv(
     ENABLE_GRAPHQL_PLAYGROUND: envalid.bool({ default: false, devDefault: true }),
     CACHE_HOST: envalid.host({ devDefault: 'localhost' }),
     CACHE_PORT: envalid.port({ default: 6379 }),
-    CACHE_PASSWORD: allowNullDefaults(envalid.str(), { devDefault: null }),
     CACHE_PREFIX: envalid.str({ default: 'WASP_API_CACHE' }),
     CACHE_MAX_TTL: envalid.num({ default: 600 }),
     CACHE_ENABLE_TLS: envalid.bool({ devDefault: false }),

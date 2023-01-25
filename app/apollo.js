@@ -1,5 +1,4 @@
 import { ApolloServer } from '@apollo/server'
-import Redis from 'ioredis'
 
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import validationPlugin from '@digicatapult/apollo-type-validation-plugin'
