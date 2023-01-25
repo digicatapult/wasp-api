@@ -1,1 +1,1 @@
-ignores: ["graphql-markdown"]
+ignores: ['graphql-markdown', '@babel/plugin-syntax-import-assertions']
