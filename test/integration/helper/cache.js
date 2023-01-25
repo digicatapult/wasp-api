@@ -4,10 +4,7 @@ import env from '../../../app/env.js'
 const { CACHE_HOST, CACHE_PORT } = env
 
 const redisClient = createClient({
-  socket: {
-    host: CACHE_HOST,
-    port: CACHE_PORT,
-  },
+  url: `redis://default:password@localhost:6379`,
 })
 
 await redisClient.connect()

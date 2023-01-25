@@ -49,7 +49,7 @@ async function createHttpServer() {
 
         const keyVCache = new KeyvAdapter(
           new Keyv({
-            store: new KeyvRedis(`redis://${env.CACHE_HOST}:${env.CACHE_PORT}`),
+            store: new KeyvRedis(`redis://default:password@localhost:6379`),
             namespace: `${env.CACHE_PREFIX}_APOLLO_`,
           })
         )
