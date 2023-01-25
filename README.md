@@ -47,6 +47,8 @@ The following configuration settings apply regardless of network provider or the
 | ENABLE_GRAPHQL_PLAYGROUND |    N     |         `true`         | Whether the GraphQL playground should be rendered                                    |
 | CACHE_HOST                |    Y     |           -            | Redis host                                                                           |
 | CACHE_PORT                |    N     |         `6379`         | Redis port                                                                           |
+| CACHE_USERNAME            |    Y     |           -            | Redis username                                                                       |
+| CACHE_PASSWORD            |    Y     |           -            | Redis password                                                                       |
 | CACHE_PREFIX              |    N     |   `WASP_API_CACHE\*`   | Cache prefix to when setting items in Redis                                          |
 | CACHE_MAX_TTL             |    N     |         `600`          | Maximum TTL for cache entries                                                        |
 | CACHE_ENABLE_TLS          |    Y     |           -            | Does Redis require TLS connections                                                   |

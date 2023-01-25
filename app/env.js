@@ -2,12 +2,6 @@ import envalid from 'envalid'
 import dotenv from 'dotenv'
 
 const nullSymbol = Symbol('null match')
-const allowNullDefaults = (validator, opts) => {
-  return envalid.makeValidator((input) => {
-    if (input === null) return nullSymbol
-    else return validator._parse(input)
-  }, `optional_${validator.type}`)(opts)
-}
 
 if (process.env.NODE_ENV === 'test') {
   dotenv.config({ path: 'test/test.env' })
@@ -24,6 +18,8 @@ const vars = envalid.cleanEnv(
     ENABLE_GRAPHQL_PLAYGROUND: envalid.bool({ default: false, devDefault: true }),
     CACHE_HOST: envalid.host({ devDefault: 'localhost' }),
     CACHE_PORT: envalid.port({ default: 6379 }),
+    CACHE_USERNAME: envalid.str({ devDefault: 'default' }),
+    CACHE_PASSWORD: envalid.str({ devDefault: 'password' }),
     CACHE_PREFIX: envalid.str({ default: 'WASP_API_CACHE' }),
     CACHE_MAX_TTL: envalid.num({ default: 600 }),
     CACHE_ENABLE_TLS: envalid.bool({ devDefault: false }),
@@ -39,11 +35,4 @@ const vars = envalid.cleanEnv(
   }
 )
 
-export default Object.entries({
-  ...vars,
-}).reduce((acc, [key, val]) => {
-  return {
-    ...acc,
-    [key]: val === nullSymbol ? null : val,
-  }
-}, {})
+export default vars

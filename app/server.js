@@ -14,6 +14,9 @@ import env from './env.js'
 import logger from './logger.js'
 import createApolloServer from './apollo.js'
 
+const { MAX_QUERY_SIZE, CACHE_USERNAME, CACHE_PASSWORD, CACHE_HOST, CACHE_PORT, CACHE_PREFIX, CACHE_MAX_TTL, PORT } =
+  env
+
 async function createHttpServer() {
   const server = createApolloServer()
   const requestLogger = pinoHttp({ logger })
@@ -34,7 +37,7 @@ async function createHttpServer() {
 
   app.use(
     cors(),
-    express.json({ limit: env.MAX_QUERY_SIZE }),
+    express.json({ limit: MAX_QUERY_SIZE }),
     expressMiddleware(server, {
       context: async ({ req }) => {
         let user = null
@@ -49,14 +52,14 @@ async function createHttpServer() {
 
         const keyVCache = new KeyvAdapter(
           new Keyv({
-            store: new KeyvRedis(`redis://default:password@localhost:6379`),
-            namespace: `${env.CACHE_PREFIX}_APOLLO_`,
+            store: new KeyvRedis(`redis://${CACHE_USERNAME}:${CACHE_PASSWORD}@${CACHE_HOST}:${CACHE_PORT}`),
+            namespace: `${CACHE_PREFIX}_APOLLO_`,
           })
         )
 
         const dataSources = {
           autoResolver: new ResolverCacheDataSource({
-            defaultTTL: env.CACHE_MAX_TTL,
+            defaultTTL: CACHE_MAX_TTL,
             cache: keyVCache,
           }),
         }
@@ -86,9 +89,9 @@ async function startServer() {
     })
   }
 
-  const server = app.listen(env.PORT, (err) => {
+  const server = app.listen(PORT, (err) => {
     if (err) throw new Error('Binding failed: ', err)
-    logger.info(`Listening on port ${env.PORT} `)
+    logger.info(`Listening on port ${PORT} `)
   })
 
   setupGracefulExit({ sigName: 'SIGINT', server, exitCode: 0 })

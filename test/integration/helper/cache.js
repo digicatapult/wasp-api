@@ -1,10 +1,10 @@
 import { createClient } from 'redis'
 import env from '../../../app/env.js'
 
-const { CACHE_HOST, CACHE_PORT } = env
+const { CACHE_USERNAME, CACHE_PASSWORD, CACHE_HOST, CACHE_PORT } = env
 
 const redisClient = createClient({
-  url: `redis://default:password@localhost:6379`,
+  url: `redis://${CACHE_USERNAME}:${CACHE_PASSWORD}@${CACHE_HOST}:${CACHE_PORT}`,
 })
 
 await redisClient.connect()
