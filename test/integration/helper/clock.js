@@ -1,6 +1,7 @@
-const sinon = require('sinon')
+import sinon from 'sinon'
+import { before, after } from 'mocha'
 
-module.exports = {
+export default {
   mockClock: (context) => {
     before(function () {
       context.clock = sinon.useFakeTimers()

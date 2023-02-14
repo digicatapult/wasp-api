@@ -1,14 +1,15 @@
-const { before, after } = require('mocha')
+import { before, after } from 'mocha'
 
-const express = require('express')
-const bodyParser = require('body-parser')
+import express, { json } from 'express'
 
-const { READINGS_SERVICE_PORT } = require('../../../app/env')
+import env from '../../../app/env.js'
+
+const { READINGS_SERVICE_PORT } = env
 
 const setupReadingsMock = (context) => {
   before(async function () {
     const app = express()
-    app.use(bodyParser.json({ type: 'application/json' }))
+    app.use(json())
 
     app.get('/v1/thing/:thingId/dataset', async (req, res) => {
       const thing = context.readingsMock.things.find(({ uuid }) => uuid === req.params.thingId)
@@ -100,4 +101,4 @@ const setupReadingsMock = (context) => {
   })
 }
 
-module.exports = { setup: setupReadingsMock }
+export const setup = setupReadingsMock

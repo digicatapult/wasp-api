@@ -261,6 +261,4 @@ const mkQueries = (client) => {
   }
 }
 
-module.exports = {
-  mkQueries,
-}
+export { mkQueries }

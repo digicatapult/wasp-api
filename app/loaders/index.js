@@ -1,9 +1,9 @@
-const things = require('./things')
+import { buildThingLoader } from './things.js'
 
 const buildDataLoaders = () => {
   return {
-    thing: things.buildThingLoader(),
+    thing: buildThingLoader(),
   }
 }
 
-module.exports = buildDataLoaders
+export default buildDataLoaders

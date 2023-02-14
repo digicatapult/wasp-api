@@ -10,10 +10,10 @@ jobs:
     name: Docs
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 18.x
       - name: Cache Node.js modules
         uses: actions/cache@v1
         with:
@@ -24,8 +24,6 @@ jobs:
             ${{ runner.OS }}-
       - name: Install Packages
         run: npm ci
-        env:
-          GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup postgres
         run: docker-compose up -d
       - name: Sleep
@@ -34,10 +32,8 @@ jobs:
           time: '10s'
       - name: Generate API Documentation
         run: npm run build:docs
-        env:
-          GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           commit-message: Update API documentation to match ${{ github.sha }}
           title: Update API documentation

@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express')
+import gql from 'graphql-tag'
 
 const typeDefs = gql`
   # directive definition used by arrayLengthDirective
@@ -197,4 +197,4 @@ const typeDefs = gql`
   scalar JSON
 `
 
-module.exports = typeDefs
+export default typeDefs

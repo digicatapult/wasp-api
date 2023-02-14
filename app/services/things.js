@@ -1,7 +1,9 @@
-const fetch = require('node-fetch')
+import fetch from 'node-fetch'
 
-const { THINGS_SERVICE_HOST, THINGS_SERVICE_PORT } = require('../env')
-const logger = require('../logger')
+import env from '../env.js'
+import logger from '../logger.js'
+
+const { THINGS_SERVICE_HOST, THINGS_SERVICE_PORT } = env
 
 class ThingsServiceError extends Error {
   constructor({ code, message }) {
@@ -156,7 +158,7 @@ const updateThing = async ({ id: thingId, ...thingDesc }) => {
   }
 }
 
-module.exports = {
+export default {
   Errors: {
     ThingsServiceError,
   },

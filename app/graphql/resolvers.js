@@ -1,11 +1,14 @@
-const { GraphQLScalarType } = require('graphql')
-const { GraphQLJSON } = require('graphql-scalars')
-const { Kind } = require('graphql/language')
-const { UserInputError } = require('apollo-server-express')
-const { withCaching } = require('@digicatapult/resolver-cache-datasource')
-const { setResolverDefault, asAdmin, asUserOrAdmin } = require('./authUtils')
+import { GraphQLScalarType } from 'graphql'
+import { GraphQLJSON } from 'graphql-scalars'
+import { Kind } from 'graphql/language/index.js'
+import { withCaching } from '@digicatapult/resolver-cache-datasource'
+import { ApolloServerErrorCode } from '@apollo/server/errors'
+import { GraphQLError } from 'graphql'
 
-const { things: thingsService, readings: readingsService, users: usersService } = require('../services')
+import authUtils from './authUtils.js'
+import { things as thingsService, readings as readingsService, users as usersService } from '../services/index.js'
+
+const { setResolverDefault, asAdmin, asUserOrAdmin } = authUtils
 
 const customTypes = {
   Date: new GraphQLScalarType({
@@ -148,7 +151,11 @@ const resolvers = {
         return user
       } catch (err) {
         if (err instanceof usersService.Errors.UsersServiceError && err.code === 409) {
-          throw new UserInputError('Username exists')
+          throw new GraphQLError('Username exists', {
+            extensions: {
+              code: ApolloServerErrorCode.BAD_USER_INPUT,
+            },
+          })
         }
         throw err
       }
@@ -158,7 +165,11 @@ const resolvers = {
         await usersService.updateUserPassword(user.id, { password })
       } catch (err) {
         if (err instanceof usersService.Errors.UsersServiceError && err.code === 400) {
-          throw new UserInputError(err.message)
+          throw new GraphQLError(err.message, {
+            extensions: {
+              code: ApolloServerErrorCode.BAD_USER_INPUT,
+            },
+          })
         }
         throw err
       }
@@ -168,7 +179,11 @@ const resolvers = {
       const users = await usersService.getUsers(user.id)
       const userToReset = users.find(({ name }) => name === username)
       if (!userToReset) {
-        throw new UserInputError(`User ${username} does not exist`)
+        throw new GraphQLError(`User ${username} does not exist`, {
+          extensions: {
+            code: ApolloServerErrorCode.BAD_USER_INPUT,
+          },
+        })
       }
       const { password } = await usersService.resetUserPassword(user.id, { userId: userToReset.id })
       return password
@@ -177,7 +192,11 @@ const resolvers = {
       const users = await usersService.getUsers(user.id)
       const userToUpdate = users.find(({ name }) => name === username)
       if (!userToUpdate) {
-        throw new UserInputError(`User ${username} does not exist`)
+        throw new GraphQLError(`User ${username} does not exist`, {
+          extensions: {
+            code: ApolloServerErrorCode.BAD_USER_INPUT,
+          },
+        })
       }
       await usersService.updateUser(user.id, { userId: userToUpdate.id, role: type })
       return true
@@ -185,4 +204,4 @@ const resolvers = {
   },
 }
 
-module.exports = [customTypes, setResolverDefault(resolvers)(asUserOrAdmin)]
+export default [customTypes, setResolverDefault(resolvers)(asUserOrAdmin)]

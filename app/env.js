@@ -1,19 +1,10 @@
-const envalid = require('envalid')
-
-const nullSymbol = Symbol('null match')
-const allowNullDefaults = (validator, opts) => {
-  return envalid.makeValidator((input) => {
-    if (input === null) return nullSymbol
-    else return validator._parse(input)
-  }, `optional_${validator.type}`)(opts)
-}
-
-const options = {
-  strict: true,
-}
+import envalid from 'envalid'
+import dotenv from 'dotenv'
 
 if (process.env.NODE_ENV === 'test') {
-  options.dotEnvPath = 'test/test.env'
+  dotenv.config({ path: 'test/test.env' })
+} else {
+  dotenv.config()
 }
 
 const vars = envalid.cleanEnv(
@@ -25,7 +16,8 @@ const vars = envalid.cleanEnv(
     ENABLE_GRAPHQL_PLAYGROUND: envalid.bool({ default: false, devDefault: true }),
     CACHE_HOST: envalid.host({ devDefault: 'localhost' }),
     CACHE_PORT: envalid.port({ default: 6379 }),
-    CACHE_PASSWORD: allowNullDefaults(envalid.str(), { devDefault: null }),
+    CACHE_USERNAME: envalid.str({ devDefault: 'default' }),
+    CACHE_PASSWORD: envalid.str({ devDefault: 'password' }),
     CACHE_PREFIX: envalid.str({ default: 'WASP_API_CACHE' }),
     CACHE_MAX_TTL: envalid.num({ default: 600 }),
     CACHE_ENABLE_TLS: envalid.bool({ devDefault: false }),
@@ -36,14 +28,9 @@ const vars = envalid.cleanEnv(
     USERS_SERVICE_HOST: envalid.host({ default: 'wasp-user-service' }),
     USERS_SERVICE_PORT: envalid.port({ default: 80 }),
   },
-  options
+  {
+    strict: true,
+  }
 )
 
-module.exports = Object.entries({
-  ...vars,
-}).reduce((acc, [key, val]) => {
-  return {
-    ...acc,
-    [key]: val === nullSymbol ? null : val,
-  }
-}, {})
+export default vars

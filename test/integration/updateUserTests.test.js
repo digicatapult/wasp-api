@@ -1,7 +1,9 @@
-const { describe, it } = require('mocha')
-const { expect } = require('chai')
-const { setup: setupClient } = require('./helper/client')
-const { setup: setupUsers, makeDefaultUsersMock } = require('./helper/usersMock')
+import { describe, it } from 'mocha'
+import { expect } from 'chai'
+import { setup as setupClient } from './helper/client.js'
+import { setup as setupUsers, makeDefaultUsersMock } from './helper/usersMock.js'
+
+import data from './helper/data.js'
 
 const {
   userLoginCreds,
@@ -13,7 +15,7 @@ const {
   createUserQuery,
   assertUpdatedUserType,
   resetUserPassword,
-} = require('./helper/data')
+} = data
 
 describe('update user tests', () => {
   describe('valid password update', () => {

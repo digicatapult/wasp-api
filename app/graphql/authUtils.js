@@ -1,4 +1,4 @@
-const { AuthenticationError } = require('apollo-server-express')
+import { GraphQLError } from 'graphql'
 
 const authOverride = Symbol('auth-override')
 
@@ -8,9 +8,13 @@ const authOverride = Symbol('auth-override')
  * token was provided or the token provided did not correspond to
  * a valid user
  */
-class AuthInvalidError extends AuthenticationError {
+class AuthInvalidError extends GraphQLError {
   constructor() {
-    super('Invalid user')
+    super('Invalid user', {
+      extensions: {
+        code: 'UNAUTHENTICATED',
+      },
+    })
   }
 }
 
@@ -18,10 +22,15 @@ class AuthInvalidError extends AuthenticationError {
  * @class InsufficientPrivilegesError
  * The role of the user was insufficiently privileged to perform the requested action
  */
-class InsufficientPrivilegesError extends AuthenticationError {
+class InsufficientPrivilegesError extends GraphQLError {
   constructor(validRoles, user) {
     super(
-      `User has insufficient privileges to perform the requested action. User has role ${user.role}. Action requires role to be one of {${validRoles}}`
+      `User has insufficient privileges to perform the requested action. User has role ${user.role}. Action requires role to be one of {${validRoles}}`,
+      {
+        extensions: {
+          code: 'UNAUTHENTICATED',
+        },
+      }
     )
   }
 }
@@ -97,7 +106,7 @@ const setResolverDefault = (graphqlTypes) => (permissionFn) => {
   return Object.fromEntries(byTypeTransformed)
 }
 
-module.exports = {
+export default {
   setResolverDefault,
   asUserOrAdmin,
   asAdmin,

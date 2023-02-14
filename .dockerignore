@@ -6,3 +6,8 @@ README.md
 .env
 .git
 token
+.c8rc
+.eslintignore
+.eslintrc
+.prettierrc
+*.md

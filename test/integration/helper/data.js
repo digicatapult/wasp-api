@@ -1,4 +1,4 @@
-const { expect } = require('chai')
+import { expect } from 'chai'
 
 const sortUsers = (a, b) => {
   if (a.username < b.username) {
@@ -164,4 +164,4 @@ const that = {
   },
 }
 
-module.exports = that
+export default that
