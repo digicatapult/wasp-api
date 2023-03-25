@@ -1,6 +1,6 @@
 {
   "name": "@digicatapult/wasp-api",
-  "version": "2.1.11",
+  "version": "2.1.12",
   "description": "GraphQL API service for WASP",
   "main": "app/index.js",
   "license": "Apache-2.0",
@@ -56,7 +56,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "graphql-markdown": "^7.0.0",
     "mocha": "^10.2.0",
-    "nodemon": "^2.0.21",
+    "nodemon": "^2.0.22",
     "pino-colada": "^2.2.2",
     "prettier": "^2.8.6",
     "redis": "^4.6.5",
