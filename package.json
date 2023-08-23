@@ -1,6 +1,6 @@
 {
   "name": "@digicatapult/wasp-api",
-  "version": "2.1.45",
+  "version": "2.1.46",
   "description": "GraphQL API service for WASP",
   "main": "app/index.js",
   "license": "Apache-2.0",
@@ -27,7 +27,7 @@
     "@apollo/server": "^4.9.1",
     "@apollo/utils.keyvadapter": "^3.0.0",
     "@digicatapult/apollo-type-validation-plugin": "^1.1.4",
-    "@digicatapult/resolver-cache-datasource": "^0.1.3",
+    "@digicatapult/resolver-cache-datasource": "^1.0.0",
     "@graphql-tools/schema": "^10.0.0",
     "@keyv/redis": "^2.7.0",
     "compression": "^1.7.4",
