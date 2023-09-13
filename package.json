@@ -1,6 +1,6 @@
 {
   "name": "@digicatapult/wasp-api",
-  "version": "2.1.46",
+  "version": "2.1.47",
   "description": "GraphQL API service for WASP",
   "main": "app/index.js",
   "license": "Apache-2.0",
@@ -60,7 +60,7 @@
     "pino-colada": "^2.2.2",
     "prettier": "^3.0.2",
     "redis": "4.6.6",
-    "sinon": "^15.2.0",
+    "sinon": "^16.0.0",
     "supertest": "^6.3.3"
   }
 }
