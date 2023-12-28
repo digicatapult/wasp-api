@@ -1,6 +1,6 @@
 {
   "name": "@digicatapult/wasp-api",
-  "version": "2.1.47",
+  "version": "2.1.48",
   "description": "GraphQL API service for WASP",
   "main": "app/index.js",
   "license": "Apache-2.0",
@@ -42,7 +42,7 @@
     "keyv": "^4.5.3",
     "node-fetch": "^3.3.2",
     "pino": "^8.15.0",
-    "pino-http": "^8.4.0"
+    "pino-http": "^9.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.10",
