@@ -1,6 +1,6 @@
 {
   "name": "@digicatapult/wasp-api",
-  "version": "2.1.47",
+  "version": "2.1.48",
   "description": "GraphQL API service for WASP",
   "main": "app/index.js",
   "license": "Apache-2.0",
@@ -48,7 +48,7 @@
     "@babel/core": "^7.22.10",
     "@babel/eslint-parser": "^7.22.10",
     "@babel/plugin-syntax-import-assertions": "^7.22.5",
-    "c8": "^8.0.1",
+    "c8": "^9.1.0",
     "chai": "^4.3.7",
     "depcheck": "^1.4.3",
     "eslint": "^8.47.0",
