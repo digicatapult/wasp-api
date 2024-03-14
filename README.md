@@ -1,5 +1,9 @@
 # `wasp-api`
 
+## Deprecation Notice
+`WASP` was deprecated on March 14th 2024, there will be no further dependency or security updates to this platform.
+---
+
 ## Introduction
 
 This service acts as the GraphQL API in the WASP for querying the status of the system and making state changes. `wasp-api` also contains a `docker-compose` file for bringing up WASP dependencies. See [Dependencies](#Dependencies) for details.
